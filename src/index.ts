@@ -15,7 +15,7 @@ const app = new Hono<{ Variables: TAuthVariables }>().basePath('/api')
 // helper to get dynamic path
 
 const stripPrefix = (prefix: string, url: string) =>
-  url.replace(new RegExp(/^\v1/), '/api')
+  url.replace(new RegExp(/^\v1/), '/api').split("v1")[1]
  
 const createProxyRoute = (prefix: string, targetBase: string) => {
 
@@ -23,7 +23,7 @@ const createProxyRoute = (prefix: string, targetBase: string) => {
     
     const path = stripPrefix(prefix, c.req.url)
 
-    const targetUrl = `${targetBase}/api${path.split("v1")[1]}`
+    const targetUrl = `${targetBase}/api${path}`
     console.log("PROXY REQUEST URL", targetUrl)
     return await proxy(targetUrl, {
       body: JSON.stringify(await c.req.json()),
