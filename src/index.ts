@@ -10,7 +10,7 @@ const app = new Hono<{ Variables: TAuthVariables }>().basePath('/api')
 .use('/api/*', cors())
 .use(secureHeaders())
 .use(logger())
-// .use("*", authMiddleware)
+.use("*", authMiddleware)
 
 // helper to get dynamic path
 
