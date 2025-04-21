@@ -5,9 +5,14 @@ export const sampleService = async (data: TCreateUser) => {
  
   //? create user
   //? update user
-  await  prisma.user.create({
+  await  prisma.design.create({
     data: {
-      name: data.name
+      name: data.name,
+      userId: 'hello',
+      canvasData: 'hello',
+      width: 1,
+      height: 1,
+      category:'Logo'
     }
   })
 }

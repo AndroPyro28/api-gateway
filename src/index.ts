@@ -5,13 +5,13 @@ import { cors } from 'hono/cors'
 import { secureHeaders } from 'hono/secure-headers'
 import sampleControllers from './routes/user/user.controller'
 import { authMiddleware, TAuthVariables } from './middlewares/auth.middleware'
+import sampleController from './routes/user'
 
 const app = new Hono<{ Variables: TAuthVariables }>().basePath('/api')
 .use('/api/*', cors())
 .use(secureHeaders())
 .use(logger())
 .use("*", authMiddleware)
-
 // helper to get dynamic path
 
 const stripPrefix = (prefix: string, url: string) =>
