@@ -7,7 +7,11 @@ import { authMiddleware, TAuthVariables } from './middlewares/auth.middleware'
 import { createProxyRoute } from './libs/proxy'
 
 const app = new Hono<{ Variables: TAuthVariables }>().basePath('/api')
-.use('/api/*', cors())
+.use('*', cors({
+    origin: '*', // or '*'
+    allowHeaders: ['Content-Type', 'Authorization'],
+    allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  }))
 .use(secureHeaders())
 .use(logger())
 .use("*", authMiddleware)
